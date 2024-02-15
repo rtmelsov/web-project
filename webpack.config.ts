@@ -1,50 +1,23 @@
 import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import webpack from 'webpack'
+import {buildWebpackConfig} from './config/build/buildWebpacConfig'
+import {buildPath, buildOptions} from './config/build/types/config'
 
-const sourcePath = path.resolve(__dirname, 'src');
-const publicPath = path.resolve(__dirname, 'public', 'index.html');
-const buildPath = path.resolve(__dirname, 'bundles_');
+const paths: buildPath = {
+    entry: path.resolve(__dirname, 'src'),
+    output: path.resolve(__dirname, 'bundles_'),
+    html: path.resolve(__dirname, 'public', 'index.html'),
 
-const config = {
-  mode: 'development',
-  entry: sourcePath,
-  output: {
-      filename: "[name].[contenthash].js",
-      path: buildPath,
-      clean: true
-  },
-  module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
-    },
-  plugins: [
-      new HtmlWebpackPlugin({
-          filename: 'index.html',
-          template: publicPath,
-          title: 'SkyBridge Invest',
-      }),
+}
 
-      new webpack.ProgressPlugin({
-      activeModules: false,
-      entries: true,
-      modules: true,
-      modulesCount: 5000,
-      profile: false,
-      dependencies: true,
-      dependenciesCount: 10000,
-      percentBy: null,
-  })
-],
+const mode = 'development'
+const isDev = mode === 'development'
 
-};
+const options: buildOptions = {
+  mode,
+  paths: paths,
+  isDev
+}
+
+const config = buildWebpackConfig(options)
 
 export default config;

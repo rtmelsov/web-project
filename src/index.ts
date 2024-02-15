@@ -1,3 +1,1 @@
-import { Hello } from "./test";
-const str: string = 'Hello'
-console.log(Hello(str))
+document.body.innerHTML = `<div>Hello</div>`

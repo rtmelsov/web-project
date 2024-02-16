@@ -1,6 +1,6 @@
 import { Counter } from './Components/Counter';
 
-export default function App() {
+export const App = () => {
   return (
     <div>
       <Counter />

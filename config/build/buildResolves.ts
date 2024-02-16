@@ -1,7 +1,7 @@
 import {ResolveOptions} from 'webpack'
 
-export function BuildResolves(): ResolveOptions {
+export function BuildResolves(extensions: string[]): ResolveOptions {
     return {
-      extensions: ['.tsx', '.ts', '.js'],
+      extensions,
     }
 }

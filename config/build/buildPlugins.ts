@@ -1,14 +1,21 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import ESLintPlugin from 'eslint-webpack-plugin'
 import {WebpackPluginInstance, ProgressPlugin} from 'webpack'
-import { buildPath } from './types/config'
+import { buildOptions } from './types/config'
 
-export function BuildPlugins({html}: buildPath): WebpackPluginInstance[] {
+export function BuildPlugins({paths, extensions}: buildOptions): WebpackPluginInstance[] {
     return [
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: html,
+            template: paths.html,
             title: 'SkyBridge Invest',
         }),
+
+        new ESLintPlugin({
+            // Plugin configuration
+            extensions, // Specify the file extensions to lint
+          }),
+      
   
         new ProgressPlugin({
         activeModules: false,

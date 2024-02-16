@@ -2,8 +2,6 @@ import path from 'path'
 import { buildWebpackConfig } from './config/build/buildWebpacConfig'
 import { buildPath, buildOptions, BuildEnv } from './config/build/types/config'
 
-
-
 export default (env: BuildEnv) => {
 
   const paths: buildPath = {
@@ -17,11 +15,14 @@ export default (env: BuildEnv) => {
 
   const isDev = mode === 'development'
 
+  const extensions = ['.tsx', '.ts', '.js']
+
   const options: buildOptions = {
     mode,
     paths: paths,
     isDev,
-    port: PORT
+    port: PORT,
+    extensions
   }
 
   const config = buildWebpackConfig(options)
